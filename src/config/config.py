@@ -15,7 +15,7 @@ class AmoConfig(DataClassJsonMixin):
 
 @dataclass
 class DatabaseConfig(DataClassJsonMixin):
-    path: str = None
+    file_name: str = None
 
 
 @dataclass
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     print(config.amo.integration_id)
     print(config.amo.secret_key)
     print(config.amo.base_url)
-    print(config.database.path)
+    print(config.database.file_name)

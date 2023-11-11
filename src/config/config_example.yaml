@@ -4,4 +4,4 @@ amo:
   base_url: "https://projectpulseonline.amocrm.ru"
 
 database:
-  path: "database_path"
+  file_name: "db.txt"
