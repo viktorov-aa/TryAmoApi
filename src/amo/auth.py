@@ -15,10 +15,7 @@ headers = {
 
 
 def get_refresh_token():
-    """ функция получения рефреш токена
-    TODO: доделать ее, чтобы сама сохраняла в файл. Сейчас я рефреш токен просто скопировал в файл
-    :return:
-    """
+    """ Функция получения refresh токена """
     data = {
         'client_id': CONFIG.amo.integration_id,
         'client_secret': CONFIG.amo.secret_key,
@@ -27,8 +24,21 @@ def get_refresh_token():
         'redirect_uri': CONFIG.amo.base_url
     }
     json_data = json.dumps(data)
-    result = requests.post(url=f'{CONFIG.amo.base_url}/oauth2/access_token', data=json_data, headers=headers)
-    print(result.text)
+    response = requests.post(url=f'{CONFIG.amo.base_url}/oauth2/access_token', data=json_data, headers=headers)
+    if response.status_code == 200:
+        # Parse the JSON response
+        result = response.json()
+
+        # Extract access_token and refresh_token from the parsed JSON
+        refresh_token = result.get("refresh_token", "")
+        db = DB()
+        db.load()
+        db.set_refresh_token(refresh_token)
+        db.save()
+        logger.info('Refresh token получен и сохранен')
+    else:
+        logger.warning(f"Error: Невозможно получить refresh токен. Status code: {response.status_code}")
+        logger.warning(f"Error: {response.text}")
 
 
 def get_access_token() -> str:
@@ -59,6 +69,7 @@ def get_access_token() -> str:
 
         # Return the obtained access token
         logger.info('Access token получен')
+        db.save()
         return access_token
     else:
         # If the request was not successful, print an error message
@@ -68,5 +79,6 @@ def get_access_token() -> str:
 
 
 if __name__ == '__main__':
+    get_refresh_token()
     logger.warning('Пробуем получить новый токен')
     logger.warning(get_access_token())
