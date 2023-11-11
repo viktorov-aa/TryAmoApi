@@ -1,0 +1,7 @@
+amo:
+  integration_id: "integration_id"
+  secret_key: "secret_key"
+  base_url: "https://projectpulseonline.amocrm.ru"
+
+database:
+  path: "database_path"

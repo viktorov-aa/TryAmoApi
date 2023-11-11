@@ -122,3 +122,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.idea/
+
+src/storage/db.txt
+
+src/config/config.yaml
