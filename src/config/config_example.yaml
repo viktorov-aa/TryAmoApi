@@ -1,6 +1,7 @@
 amo:
   integration_id: "integration_id"
   secret_key: "secret_key"
+  authorization_code: 'authorization_code'
   base_url: "https://projectpulseonline.amocrm.ru"
 
 database:

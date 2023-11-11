@@ -10,6 +10,7 @@ from yamldataclassconfig.config import YamlDataClassConfig
 class AmoConfig(DataClassJsonMixin):
     integration_id: str = None
     secret_key: str = None
+    authorization_code: str = None
     base_url: str = None
 
 

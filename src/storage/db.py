@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from loguru import logger
 
 from src.config.config import Config
@@ -7,7 +9,7 @@ class DB:
     def __init__(self):
         config = Config()
         config.load()
-        self.file_name = config.database.file_name
+        self.file_name = Path(__file__).parent / config.database.file_name
         self.refresh_token = ''
 
         self.load()
@@ -39,6 +41,6 @@ class DB:
 
 if __name__ == '__main__':
     db = DB()
-    db.set_refresh_token('refresh_token')
+    # db.set_refresh_token('refresh_token')
     logger.warning(f'Токен прочитан: {db.get_refresh_token()}')
     db.save()
