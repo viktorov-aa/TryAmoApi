@@ -17,7 +17,7 @@
 ## Нужные методы
 - список воронок: GET /api/v4/leads/pipelines
 - события: GET /api/v4/events 
-
+- пользователи: GET /api/v4/users
 
 ## Ссылки
 
